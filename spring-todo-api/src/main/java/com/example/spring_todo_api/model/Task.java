@@ -30,7 +30,6 @@ public class Task {
     @Column(nullable = false)
     private boolean completed = false;
 
-    @NotNull(message = "CreatedAt is required!")
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

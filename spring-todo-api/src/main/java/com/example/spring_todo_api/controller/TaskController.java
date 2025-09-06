@@ -32,4 +32,9 @@ public class TaskController {
         Task newTask = service.createTask(task);
         return new ResponseEntity<>(newTask, HttpStatus.CREATED);
     }
+
+    @PutMapping("/task")
+    public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task){
+        return ResponseEntity.ok(service.updateTask(task));
+    }
 }

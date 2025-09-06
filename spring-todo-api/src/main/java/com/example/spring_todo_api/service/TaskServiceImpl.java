@@ -25,4 +25,8 @@ public class TaskServiceImpl implements TaskService{
         repo.save(task);
         return task;
     }
+
+    public Task updateTask(Task task){
+        return repo.save(task);
+    }
 }

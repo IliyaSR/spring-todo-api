@@ -28,13 +28,18 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task){
+    public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
         Task newTask = service.createTask(task);
         return new ResponseEntity<>(newTask, HttpStatus.CREATED);
     }
 
     @PutMapping("/task")
-    public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task){
+    public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task) {
         return ResponseEntity.ok(service.updateTask(task));
+    }
+
+    @DeleteMapping("/task/{id}")
+    public ResponseEntity<String> deleteTask(@PathVariable long id) {
+        return ResponseEntity.ok(service.deleteTask(id));
     }
 }

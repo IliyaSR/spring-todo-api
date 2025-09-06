@@ -8,4 +8,5 @@ interface TaskService{
     List<Task> getAllTasks();
     Task createTask(Task task);
     Task updateTask(Task task);
+    String deleteTask(long id);
 }

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController()
+@RequestMapping("/tasks")
 public class TaskController {
 
     TaskServiceImpl service;
@@ -23,28 +24,28 @@ public class TaskController {
         this.service = service;
     }
 
-    @GetMapping("/tasks")
+    @GetMapping("")
     public ResponseEntity<List<Task>> getTasks() {
         return ResponseEntity.ok(service.getAllTasks());
     }
 
-    @GetMapping("/task/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Task>> getTaskById(@PathVariable long id) {
         return ResponseEntity.ok(service.getTaskById(id));
     }
 
-    @PostMapping("/tasks")
+    @PostMapping("")
     public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
         Task newTask = service.createTask(task);
         return new ResponseEntity<>(newTask, HttpStatus.CREATED);
     }
 
-    @PutMapping("/task")
-    public ResponseEntity<Task> updateTask(@Valid @RequestBody Task task) {
-        return ResponseEntity.ok(service.updateTask(task));
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@Valid @PathVariable long id, @RequestBody Task task) {
+        return ResponseEntity.ok(service.updateTask(id, task));
     }
 
-    @DeleteMapping("/task/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable long id) {
         return ResponseEntity.ok(service.deleteTask(id));
     }

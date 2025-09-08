@@ -22,6 +22,10 @@ public class TaskServiceImpl implements TaskService {
         return repo.findAll();
     }
 
+    public Optional<Task> getTaskById(long id){
+        return repo.findById(id);
+    }
+
     public Task createTask(Task task) {
         repo.save(task);
         return task;

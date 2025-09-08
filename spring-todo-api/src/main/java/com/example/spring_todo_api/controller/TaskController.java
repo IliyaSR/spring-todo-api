@@ -11,8 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController
+@RestController()
 public class TaskController {
 
     TaskServiceImpl service;
@@ -25,6 +26,11 @@ public class TaskController {
     @GetMapping("/tasks")
     public ResponseEntity<List<Task>> getTasks() {
         return ResponseEntity.ok(service.getAllTasks());
+    }
+
+    @GetMapping("/task/{id}")
+    public ResponseEntity<Optional<Task>> getTaskById(@PathVariable long id) {
+        return ResponseEntity.ok(service.getTaskById(id));
     }
 
     @PostMapping("/tasks")

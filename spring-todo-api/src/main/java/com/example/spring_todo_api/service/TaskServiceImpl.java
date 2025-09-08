@@ -41,13 +41,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public String deleteTask(long id) {
-        Optional<Task> task = repo.findById(id);
+        repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
 
-        if (task.isPresent()) {
-            repo.deleteById(id);
-            return "Deleted!";
-        } else {
-            return "Don't found element!";
-        }
+        repo.deleteById(id);
+        return "Task was deleted!";
     }
 }

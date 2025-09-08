@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
         return repo.findAll();
     }
 
-    public Optional<Task> getTaskById(long id){
+    public Optional<Task> getTaskById(long id) {
         return repo.findById(id);
     }
 
@@ -31,17 +31,22 @@ public class TaskServiceImpl implements TaskService {
         return task;
     }
 
-    public Task updateTask(Task task) {
-        return repo.save(task);
+    public Task updateTask(long id, Task task) {
+        Task currentTask = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
+        currentTask.setTitle(task.getTitle());
+        currentTask.setDescription(task.getDescription());
+        currentTask.setCompleted(task.getCompleted());
+        return repo.save(currentTask);
     }
 
     public String deleteTask(long id) {
         Optional<Task> task = repo.findById(id);
 
-        if(task.isPresent()){
+        if (task.isPresent()) {
             repo.deleteById(id);
             return "Deleted!";
-        }else{
+        } else {
             return "Don't found element!";
         }
     }

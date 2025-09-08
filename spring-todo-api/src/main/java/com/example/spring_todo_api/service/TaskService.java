@@ -9,6 +9,6 @@ interface TaskService{
     List<Task> getAllTasks();
     Optional<Task> getTaskById(long id);
     Task createTask(Task task);
-    Task updateTask(Task task);
+    Task updateTask(long id, Task task);
     String deleteTask(long id);
 }
